@@ -12,8 +12,9 @@ from sklearn.metrics import f1_score, mean_squared_error,accuracy_score
 import pandas as pd
 from sklearn import svm
 from sklearn.svm import SVC
+import joblib  # Save to file
 
-total_data = pd.read_csv("student-mat.csv", sep = ';')
+total_data = pd.read_csv(r"Student-Performance\Code\student-mat.csv", sep = ';')
 # we need to clean the data and get everything into a numeric form
 col_to_remove = ['address', 'reason','romantic','Walc','nursery','traveltime','Mjob','Fjob']
 data_drop = total_data.drop(col_to_remove, axis=1)
@@ -48,3 +49,7 @@ print("accuracy: ", model.score(X_train,y_train))
 print("accuracy: ", model.score(X_test,y_test))
 print(y_test)
 print(y_pred)
+
+# save the model to working directory
+joblib_file = "best_model.pkl"   
+joblib.dump(model, joblib_file)
